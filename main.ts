@@ -24,4 +24,13 @@ namespace Ultrasonic {
 
         return distance;
     }
+
+    /**
+     * Check if an obstacle is detected within 30cm.
+     * @return True if obstacle is detected, otherwise false
+     */
+    //% block="obstacle is there"
+    export function isObstacle(): boolean {
+        return readDistance() < 30;
+    }
 }
