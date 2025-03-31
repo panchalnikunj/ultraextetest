@@ -21,4 +21,16 @@ namespace Ultrasonic {
 
         return distance;
     }
+
+    /**
+     * Check if an obstacle is detected within 30cm.
+     * @param trigPin the pin connected to the trigger
+     * @param echoPin the pin connected to the echo
+     */
+    //% block="if obstacle is there trig %trigPin echo %echoPin"
+    //% trigPin.fieldEditor="gridpicker" trigPin.fieldOptions.columns=4
+    //% echoPin.fieldEditor="gridpicker" echoPin.fieldOptions.columns=4
+    export function isObstacle(trigPin: DigitalPin, echoPin: DigitalPin): boolean {
+        return readDistance(trigPin, echoPin) < 30;
+    }
 }
