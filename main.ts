@@ -4,7 +4,7 @@ namespace Ultrasonic {
      * Measure distance using an ultrasonic sensor.
      * @return Distance in centimeters
      */
-    //% block="read distance in cm"
+    //% block="distance"
     export function readDistance(): number {
         let trigger = DigitalPin.P1;
         let echo = DigitalPin.P0;
