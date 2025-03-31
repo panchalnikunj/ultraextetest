@@ -1,31 +1,27 @@
-// Ultrasonic sensor extension for micro:bit
-
+//% block="Ultrasonic Sensor"
 namespace Ultrasonic {
     /**
-     * Get the distance in centimeters from the ultrasonic sensor.
+     * Measure distance using an ultrasonic sensor.
+     * @return Distance in centimeters
      */
-    //% block="read distance"
+    //% block="read distance in cm"
     export function readDistance(): number {
-        let trigPin: DigitalPin = DigitalPin.P1;
-        let echoPin: DigitalPin.P0;
+        let trigger = DigitalPin.P1;
+        let echo = DigitalPin.P0;
 
-        pins.digitalWritePin(trigPin, 0);
+        // Send a 10µs pulse to trigger pin
+        pins.digitalWritePin(trigger, 0);
         control.waitMicros(2);
-        pins.digitalWritePin(trigPin, 1);
+        pins.digitalWritePin(trigger, 1);
         control.waitMicros(10);
-        pins.digitalWritePin(trigPin, 0);
+        pins.digitalWritePin(trigger, 0);
 
-        let duration = pins.pulseIn(echoPin, PulseValue.High, 23200);
-        let distance = duration / 58;
+        // Measure the pulse duration on echo pin
+        let duration = pins.pulseIn(echo, PulseValue.High, 25000); // Timeout at ~4m
+
+        // Convert duration to distance (speed of sound = 343 m/s)
+        let distance = duration * 0.034 / 2;
 
         return distance;
-    }
-
-    /**
-     * Check if an obstacle is detected within 30cm.
-     */
-    //% block="if obstacle is there"
-    export function isObstacle(): boolean {
-        return readDistance() < 30;
     }
 }
