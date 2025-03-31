@@ -1,18 +1,23 @@
 // Ultrasonic sensor extension for micro:bit
 
 namespace Ultrasonic {
+    export enum PinSet {
+        //% block="P0-1"
+        P0_1,
+        //% block="P3-4"
+        P3_4
+    }
+
     /**
      * Get the distance in centimeters from the ultrasonic sensor.
      * @param pinSet select P0-1 or P3-4 for sensor connection
      */
     //% block="read distance from %pinSet"
-    //% pinSet.shadow="dropdown" pinSet.defl="P0-1"
-    //% pinSet.fieldEditor="gridpicker" pinSet.fieldOptions.columns=2
-    export function readDistance(pinSet: string): number {
+    export function readDistance(pinSet: PinSet): number {
         let trigPin: DigitalPin;
         let echoPin: DigitalPin;
 
-        if (pinSet === "P0-1") {
+        if (pinSet === PinSet.P0_1) {
             trigPin = DigitalPin.P1;
             echoPin = DigitalPin.P0;
         } else {
@@ -37,9 +42,7 @@ namespace Ultrasonic {
      * @param pinSet select P0-1 or P3-4 for sensor connection
      */
     //% block="if obstacle is there at %pinSet"
-    //% pinSet.shadow="dropdown" pinSet.defl="P0-1"
-    //% pinSet.fieldEditor="gridpicker" pinSet.fieldOptions.columns=2
-    export function isObstacle(pinSet: string): boolean {
+    export function isObstacle(pinSet: PinSet): boolean {
         return readDistance(pinSet) < 30;
     }
 }
